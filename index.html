@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Sim - Habilidades</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <h1>Mi Sim: Mejora tus habilidades</h1>
+    <p>Elige una categoría para empezar</p>
+  </header>
+
+  <!-- Sección de categorías -->
+  <section class="categorias" id="categorias">
+    <div class="categoria" data-categoria="conocimiento">📘 Conocimiento</div>
+    <div class="categoria" data-categoria="habilidades">🎯 Habilidades</div>
+    <div class="categoria" data-categoria="idiomas">🌍 Idiomas</div>
+    <div class="categoria" data-categoria="salud">💪 Salud</div>
+    <div class="categoria" data-categoria="creatividad">🎨 Creatividad</div>
+    <div class="categoria" data-categoria="social">🗣️ Comunicación</div>
+  </section>
+
+  <!-- Sección de habilidades por categoría -->
+  <section class="habilidades" id="zona-habilidades">
+    <h2 id="titulo-categoria">Categoría</h2>
+    <div id="lista-habilidades"></div>
+    <div class="volver" onclick="volver()">← Volver a categorías</div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

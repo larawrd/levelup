@@ -1,0 +1,113 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body */
+  body {
+    font-family: system-ui, sans-serif;
+    background: #f5f5f5;
+    padding: 2rem;
+    color: #333;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* Categorías */
+  .categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .categoria {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .categoria:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Habilidades */
+  .habilidades {
+    display: none;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .habilidad {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+  }
+  
+  .nivel {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+  
+  li {
+    margin: 0.5rem 0;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  button.subir {
+    background-color: #00c4b4;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none;
+  }
+  
+  button.subir.visible {
+    display: inline-block;
+  }
+  
+  .volver {
+    margin-top: 2rem;
+    display: block;
+    text-align: center;
+    color: #00c4b4;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
