@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mi Sim - Habilidades</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <meta charset="UTF-8">
+  <title>SimVida</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+
   <header>
-    <h1>Mi Sim: Mejora tus habilidades</h1>
-    <p>Elige una categoría para empezar</p>
+    <h1>Uply 🌱</h1>
+    <p>Desarrolla tus habilidades como si fueras un Sim</p>
   </header>
 
-  <!-- Sección de categorías -->
-  <section class="categorias" id="categorias">
-    <div class="categoria" data-categoria="conocimiento">📘 Conocimiento</div>
-    <div class="categoria" data-categoria="habilidades">🎯 Habilidades</div>
-    <div class="categoria" data-categoria="idiomas">🌍 Idiomas</div>
-    <div class="categoria" data-categoria="salud">💪 Salud</div>
-    <div class="categoria" data-categoria="creatividad">🎨 Creatividad</div>
-    <div class="categoria" data-categoria="social">🗣️ Comunicación</div>
-  </section>
+  <main>
+    <section id="categorias">
+      <div class="categoria" data-categoria="conocimiento">📘 Conocimiento</div>
+      <div class="categoria" data-categoria="habilidades">🛠️ Habilidades</div>
+      <div class="categoria" data-categoria="idiomas">🌍 Idiomas</div>
+      <div class="categoria" data-categoria="salud">💪 Salud</div>
+      <div class="categoria" data-categoria="creatividad">🎨 Creatividad</div>
+      <div class="categoria" data-categoria="social">🧑‍🤝‍🧑 Social</div>
+    </section>
 
-  <!-- Sección de habilidades por categoría -->
-  <section class="habilidades" id="zona-habilidades">
-    <h2 id="titulo-categoria">Categoría</h2>
-    <div id="lista-habilidades"></div>
-    <div class="volver" onclick="volver()">← Volver a categorías</div>
-  </section>
+    <section class="habilidades" id="zona-habilidades">
+      <h2 id="titulo-categoria">Categoría</h2>
+      <button id="agregar-habilidad">➕ Agregar Habilidad</button>
+      <div id="lista-habilidades"></div>
+      <div class="volver" onclick="volver()">← Volver a categorías</div>
+    </section>
+  </main>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>Elige habilidades para añadir</h3>
+      <ul id="lista-popup"></ul>
+      <button onclick="cerrarPopup()">Cerrar</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
