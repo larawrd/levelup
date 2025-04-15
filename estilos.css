@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Daydream';
+  src: url('Daydream.ttf') format('truetype');
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
@@ -11,6 +16,7 @@ body {
   
   header {
     background-color: #b7d3a8;
+    font-family: 'Daydream', cursive;
     color: #161616;
     padding: 2rem;
     text-align: center;

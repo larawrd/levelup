@@ -1,4 +1,6 @@
 const habilidadesPorCategoria = {
+  
+  //CONOCIMIENTO
   conocimiento: [
     { 
       nombre: "Lectura", 
@@ -31,6 +33,8 @@ const habilidadesPorCategoria = {
       ]
     }
   ],
+
+  //HABILIDADES
   habilidades: [
     { 
       nombre: "Cubo Rubik", 
@@ -70,7 +74,6 @@ const usuarioHabilidades = {
   habilidades: [],
   idiomas: [],
   salud: [],
-  creatividad: [],
   social: []
 };
 
