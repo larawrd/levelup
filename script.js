@@ -1,9 +1,7 @@
 const habilidadesPorCategoria = {
-  
-  //CONOCIMIENTO
   conocimiento: [
-    { 
-      nombre: "Lectura", 
+    {
+      nombre: "Lectura",
       misiones: [
         ["Leer 10 páginas", "Leer 3 días", "Comentar un libro"],
         ["Leer 20 páginas", "Leer 5 días", "Escribir reseña"],
@@ -17,8 +15,8 @@ const habilidadesPorCategoria = {
         ["Leer 400 páginas", "Leer 40 días", "Dirigir una mesa redonda sobre libro"]
       ]
     },
-    { 
-      nombre: "Historia", 
+    {
+      nombre: "Historia",
       misiones: [
         ["Estudiar 1h", "Ver documental", "Escribir resumen"],
         ["Estudiar 2h", "Ver documental avanzado", "Escribir ensayo"],
@@ -33,11 +31,9 @@ const habilidadesPorCategoria = {
       ]
     }
   ],
-
-  //HABILIDADES
   habilidades: [
-    { 
-      nombre: "Cubo Rubik", 
+    {
+      nombre: "Cubo Rubik",
       misiones: [
         ["Resolver 1 cara", "Resolver 3 caras", "Resolver cubo"],
         ["Resolver 2 caras", "Resolver cubo con un solo movimiento", "Resolver cubo en menos de 5 minutos"],
@@ -51,8 +47,8 @@ const habilidadesPorCategoria = {
         ["Resolver cubo en 1 segundo", "Resolver cubo sin mirar", "Resolver cubo con los pies en menos de 10 segundos"]
       ]
     },
-    { 
-      nombre: "Ajedrez", 
+    {
+      nombre: "Ajedrez",
       misiones: [
         ["Jugar 3 partidas", "Leer aperturas", "Jugar con oponente"],
         ["Jugar 5 partidas", "Estudiar tácticas", "Jugar con un maestro"],
@@ -74,10 +70,33 @@ const usuarioHabilidades = {
   habilidades: [],
   idiomas: [],
   salud: [],
-  social: []
+};
+
+const contadores = {
+  conocimiento: 0,
+  habilidades: 0,
+  idiomas: 0,
+  salud: 0
 };
 
 let categoriaActual = null;
+
+// 🧠 Inicializar totales disponibles
+function contarTotalesDisponibles() {
+  for (let cat in habilidadesPorCategoria) {
+    contadores[cat] = habilidadesPorCategoria[cat].length;
+  }
+}
+
+// 🔢 Actualizar los contadores en pantalla
+function actualizarContadoresDOM() {
+  for (let cat in usuarioHabilidades) {
+    const total = contadores[cat] ?? 0;
+    const actual = usuarioHabilidades[cat].length;
+    const span = document.getElementById(`contador-${cat}`);
+    if (span) span.textContent = `${actual}/${total}`;
+  }
+}
 
 function mostrarHabilidades(categoria) {
   categoriaActual = categoria;
@@ -88,7 +107,6 @@ function mostrarHabilidades(categoria) {
   lista.innerHTML = '';
 
   usuarioHabilidades[categoria].forEach((hab, index) => {
-    // fallback por si no tiene "nivel"
     if (!hab.nivel) hab.nivel = 1;
 
     const nivelActual = hab.nivel ?? 1;
@@ -117,11 +135,14 @@ function mostrarHabilidades(categoria) {
   document.querySelectorAll('.subir').forEach(btn => {
     btn.addEventListener('click', () => subirNivel(btn.dataset.index));
   });
+
+  actualizarContadoresDOM();
 }
 
 function volver() {
   document.getElementById('zona-habilidades').style.display = 'none';
   document.getElementById('categorias').style.display = 'grid';
+  actualizarContadoresDOM();
 }
 
 document.getElementById('agregar-habilidad').addEventListener('click', () => {
@@ -149,7 +170,7 @@ document.getElementById('agregar-habilidad').addEventListener('click', () => {
       seleccionadas.forEach(input => {
         const habilidad = habilidadesPorCategoria[categoriaActual].find(h => h.nombre === input.value);
         const copia = JSON.parse(JSON.stringify(habilidad));
-        copia.nivel = 1; // Aseguramos que al agregarla, empieza en nivel 1
+        copia.nivel = 1;
         usuarioHabilidades[categoriaActual].push(copia);
       });
       cerrarPopup();
@@ -183,7 +204,6 @@ function subirNivel(index) {
 
   mostrarHabilidades(categoriaActual);
 
-  // Animación
   setTimeout(() => {
     const div = document.querySelector(`.habilidad[data-index="${index}"]`);
     if (div) {
@@ -222,3 +242,7 @@ function lanzarConfettiSobre(element) {
     container.remove();
   }, 1500);
 }
+
+// 🚀 Arranque: cargar totales y actualizar contadores
+contarTotalesDisponibles();
+actualizarContadoresDOM();
