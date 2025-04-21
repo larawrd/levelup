@@ -5,6 +5,7 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
+    width: auto;
     margin: 0;
     padding: 0;
     background: #fdf6ec;
@@ -41,21 +42,37 @@ body {
   }
   
   .categoria {
-    background: #b7d3a8;
-    border: 2px solid #a1c49a;
-    padding: 2rem;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    padding: 1.5rem;
     text-align: center;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    color: #161616;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333333;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   .categoria:hover {
-    background-color: #cdddf5;
     transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-color: #b7d3a8;
   }
+  
+  .categoria::before {
+    content: attr(data-emoji);
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+    line-height: 1;
+  }
+  
   
   .habilidades {
     display: none;
@@ -221,3 +238,29 @@ body {
     }
   }
   
+  /* Icono de la copa en la esquina inferior derecha */
+.icono-logros {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.icono-logros:hover {
+  background-color: #f1f1f1;
+}
+
+/* Icono de la copa */
+.icono-logros img {
+  width: 35px;
+  height: 35px;
+}
