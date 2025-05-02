@@ -62,7 +62,24 @@ const habilidadesPorCategoria = {
         ["Jugar 60 partidas", "Leer 2 libros de ajedrez", "Ser entrenador de ajedrez"]
       ]
     }
-  ]
+  ],
+  idiomas: [
+    {
+      nombre: "Inglés aplicado",
+      misiones: [
+        ["Leer un artículo corto en inglés", "Ver un video de 5 min con subtítulos", "Escribir 3 frases sobre ti"],
+        ["Leer una noticia en inglés", "Escuchar un podcast básico", "Traducir una canción fácil"],
+        ["Ver un capítulo de una serie en inglés con subtítulos", "Escribir una reseña de lo que viste", "Aprender 15 palabras nuevas"],
+        ["Leer una historia corta sin traducir", "Grabar un audio hablando de tu día", "Escribir una pequeña historia"],
+        ["Hacer una lista de expresiones comunes", "Usarlas en frases propias", "Mantener una charla escrita con un bot (ej. ChatGPT en inglés)"],
+        ["Ver una película en inglés con subtítulos en inglés", "Hacer una lista de vocabulario avanzado", "Escribir una crítica"],
+        ["Jugar un videojuego en inglés y describir la historia", "Explicar sus reglas en inglés", "Grabar un audio hablando de él"],
+        ["Unirte a un foro de discusión en inglés", "Publicar y responder a comentarios", "Aprender vocabulario de ese tema"],
+        ["Dar una presentación oral sobre un tema (grabada)", "Pedir feedback a alguien que hable inglés", "Aplicar correcciones"],
+        ["Mantener una conversación de 20 minutos con una persona nativa", "Escribir un resumen de esa conversación", "Identificar y estudiar tus errores"]
+      ]
+    }
+  ],
 };
 
 const usuarioHabilidades = {
@@ -86,6 +103,59 @@ function contarTotalesDisponibles() {
   for (let cat in habilidadesPorCategoria) {
     contadores[cat] = habilidadesPorCategoria[cat].length;
   }
+}
+
+// Crear el radar chart con valores iniciales
+const ctx = document.getElementById('radarChart').getContext('2d');
+const radarChart = new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['Conocimiento', 'Habilidades', 'Idiomas', 'Salud'],
+    datasets: [{
+      label: 'Progreso',
+      data: [0, 0, 0, 0],
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: false,
+    scales: {
+      r: {
+        suggestedMin: 0,
+        suggestedMax: 100,
+        ticks: {
+          stepSize: 20,
+          backdropColor: 'transparent'
+        }
+      }
+    }
+  }
+});
+
+
+function calcularNivelesRadar() {
+  const categorias = ['conocimiento', 'habilidades', 'idiomas', 'salud'];
+
+  return categorias.map(categoria => {
+    const habilidadesUsuario = usuarioHabilidades[categoria] || [];
+
+    // SOLO contar las que el usuario tiene
+    const nivelMaximoPorHabilidad = 10;
+    const nivelMaximoCategoria = habilidadesUsuario.length * nivelMaximoPorHabilidad;
+
+    if (nivelMaximoCategoria === 0) return 0;
+
+    const nivelesCompletados = habilidadesUsuario.reduce((total, h) => total + (h.nivel || 0), 0);
+    return Math.round((nivelesCompletados / nivelMaximoCategoria) * 100);
+  });
+}
+
+function actualizarRadar() {
+  const progresoPorCategoria = calcularNivelesRadar();
+  radarChart.data.datasets[0].data = progresoPorCategoria;
+  radarChart.update();
 }
 
 // 🔢 Actualizar los contadores en pantalla
@@ -196,14 +266,23 @@ function actualizarBoton() {
   });
 }
 
+// Función que actualiza el radar con los nuevos datos
+
+// Función para subir de nivel una habilidad y actualizar el radar
 function subirNivel(index) {
+  // Obtener la habilidad que corresponde al índice
   const habilidad = usuarioHabilidades[categoriaActual][index];
+  
+  // Si la habilidad no ha alcanzado el nivel máximo (10), aumentamos su nivel
   if (habilidad.nivel < 10) {
-    habilidad.nivel++;
+    habilidad.nivel++;  // Subir el nivel de la habilidad
+    actualizarRadar();  // Actualizar el radar con los nuevos datos
   }
-
+  
+  // Actualizar la interfaz de usuario (mostrar habilidades actualizadas)
   mostrarHabilidades(categoriaActual);
-
+  
+  // Animación de subida de nivel
   setTimeout(() => {
     const div = document.querySelector(`.habilidad[data-index="${index}"]`);
     if (div) {
@@ -213,6 +292,7 @@ function subirNivel(index) {
     }
   }, 100);
 }
+
 
 document.querySelectorAll('.categoria').forEach(cat => {
   cat.addEventListener('click', () => {
@@ -243,6 +323,9 @@ function lanzarConfettiSobre(element) {
   }, 1500);
 }
 
+
 // 🚀 Arranque: cargar totales y actualizar contadores
 contarTotalesDisponibles();
 actualizarContadoresDOM();
+actualizarRadar(); // <- Esta solo funcionará después de definir `radarChart`
+

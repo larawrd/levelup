@@ -13,6 +13,14 @@
   </header>
 
   <main>
+
+    <canvas id="radarChart" width="400" height="400"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
     <section id="categorias">
       <div class="categoria" data-categoria="conocimiento">
         📘 Conocimiento <span class="contador" id="contador-conocimiento">0/0</span>
@@ -27,9 +35,8 @@
         💪 Salud <span class="contador" id="contador-salud">0/0</span>
       </div>
     </section>
-    
 
-    <section class="habilidades" id="zona-habilidades">
+    <section class="habilidades" id="zona-habilidades" style="display:none;">
       <h2 id="titulo-categoria">Categoría</h2>
       <button id="agregar-habilidad">➕ Agregar Habilidad</button>
       <div id="lista-habilidades"></div>
@@ -38,7 +45,7 @@
   </main>
 
   <!-- Popup -->
-  <div class="popup" id="popup">
+  <div class="popup" id="popup" style="display:none;">
     <div class="popup-content">
       <h3>Elige habilidades para añadir</h3>
       <ul id="lista-popup"></ul>
@@ -46,12 +53,13 @@
     </div>
   </div>
 
+  <!-- Icono de logros -->
+  <div class="icono-logros" id="icono-logros">
+    <img src="trophy.png" alt="Logros" />
+  </div>
+
+  <!-- Chart.js y tu script -->
+
   <script src="script.js"></script>
-
-  <!-- Icono de la Copa -->
-<div class="icono-logros" id="icono-logros">
-  <img src="trophy.png" alt="Logros" />
-</div>
-
 </body>
 </html>
